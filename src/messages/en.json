@@ -27,7 +27,13 @@
   },
 
   "characters": {
-    "title": "Characters"
+    "title": "Characters",
+    "statistics": {
+      "title": "Statistics",
+      "number_of_characters": "Number of characters: {number}",
+      "number_of_five_stars": "Number of 5★ characters: {number}",
+      "number_of_four_stars": "Number of 4★ characters: {number}"
+    }
   },
 
   "sorter": {

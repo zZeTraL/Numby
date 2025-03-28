@@ -16,6 +16,7 @@ import AppBreadcrumb from "@/components/Breadcrumb";
 import SideLine from "@/components/SideLine";
 import Footer from "@/components/footer/Footer";
 import {Separator} from "@/components/ui/separator";
+import Image from "next/image";
 
 // Metadata
 export const metadata = {
@@ -39,8 +40,17 @@ export default async function LocaleLayout({children, params}: {
                 <NextIntlClientProvider>
                     <SidebarProvider>
                         <AppSidebar/>
-                        <div className="flex relative w-full min-h-[100svh]">
-                            <main className="flex flex-col w-full m-4 p-4 bg-foreground rounded-xl gap-4">
+                        <div className="flex w-full min-h-[100svh] overflow-hidden">
+                            <main className="relative flex flex-col w-full m-4 p-4 bg-foreground rounded-xl gap-4 z-10">
+                                <div className="fixed -bottom-10 -right-10 -z-10 opacity-80">
+                                    <Image
+                                        src="/DecoTrainBig.svg"
+                                        alt="DecoTrain"
+                                        width={768}
+                                        height={768}
+                                        priority={true}
+                                    />
+                                </div>
                                 <div className="flex items-center gap-4">
                                     <SidebarTrigger/>
                                     <Separator orientation="vertical"/>

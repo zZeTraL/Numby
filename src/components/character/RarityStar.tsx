@@ -18,7 +18,7 @@ export default function RarityStar({rarity}: Props) {
     }
 
     return (
-        <div className="flex gap-1 pointer-events-none">
+        <div className="flex gap-1 w-32 h-6 pointer-events-none">
             <Image
                 src={`/game/icon/deco/${getIconNameByRarity(rarity)}`}
                 alt="Star"

@@ -3,6 +3,9 @@
 // React
 import {useReducer, useState} from "react";
 
+// i18n
+import {useTranslations} from "next-intl";
+
 // Components
 import AppSortBy from "@/components/SortBy";
 import CharacterFilter from "@/components/character/CharacterFilter";
@@ -10,6 +13,7 @@ import CharacterCard from "@/components/character/CharacterCard";
 
 // Types
 import {DataType, CharacterType} from "@/utils/types/game";
+import RichText from "@/components/RichText";
 interface Props {
     data: DataType;
 }
@@ -28,6 +32,7 @@ const availableSortOptions = ["name", "element", "path", "rarity"];
 const availableFilters = ["Physical", "Fire", "Ice", "Thunder", "Wind", "Quantum", "Imaginary", "Warrior", "Rogue", "Mage", "Shaman", "Warlock", "Knight", "Priest"];
 
 export default function CharacterShowcase({data}: Props) {
+    const t = useTranslations("characters");
     const [sortOption, setSortOption] = useState<string>("");
     const [state, dispatch] = useReducer(reducer, availableFilters);
 
@@ -47,32 +52,49 @@ export default function CharacterShowcase({data}: Props) {
     }
 
     return (
-        <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
-                <AppSortBy options={availableSortOptions} callbackAction={handleSort} />
-                <CharacterFilter data={data} state={state} callbackAction={dispatch} />
+        <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+                    <AppSortBy options={availableSortOptions} callbackAction={handleSort} />
+                    <CharacterFilter data={data} state={state} callbackAction={dispatch} />
+                </div>
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                    {
+                        data.characters?.map((character: CharacterType, index: number) => {
+                            if (character.name === "{NICKNAME}") return null;
+                            if (state.length > 0 && (!state.includes(character.element) || !state.includes(character.path))) return null;
+
+                            const path = data.paths?.find((path) => path.id === character.path);
+                            const element = data.elements?.find((element) => element.id === character.element);
+
+                            if (!path || !element) return null;
+
+                            return (
+                                <CharacterCard
+                                    character={character}
+                                    path={path}
+                                    element={element}
+                                    key={index}
+                                />
+                            );
+                        })
+                    }
+                </div>
             </div>
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                {
-                    data.characters?.map((character: CharacterType, index: number) => {
-                        if (character.name === "{NICKNAME}") return null;
-                        if (state.length > 0 && (!state.includes(character.element) || !state.includes(character.path))) return null;
 
-                        const path = data.paths?.find((path) => path.id === character.path);
-                        const element = data.elements?.find((element) => element.id === character.element);
-
-                        if (!path || !element) return null;
-
-                        return (
-                            <CharacterCard
-                                character={character}
-                                path={path}
-                                element={element}
-                                key={index}
-                            />
-                        );
-                    })
-                }
+            <div className="flex flex-col gap-4">
+                <h1 className="text-important text-2xl leading-none">{t("statistics.title")}</h1>
+                <div className="flex flex-col">
+                    <RichText className="text-md tracking-wide">
+                        {(tags) => t.rich("statistics.number_of_characters", {...tags, number: data.characters?.length ?? "N/A"})}
+                    </RichText>
+                    <RichText className="text-md tracking-wide">
+                        {(tags) => t.rich("statistics.number_of_five_stars", {...tags, number: data.characters?.filter((character: CharacterType) => character.rarity === 5).length ?? "N/A"})}
+                    </RichText>
+                    <RichText className="text-md tracking-wide">
+                        {(tags) => t.rich("statistics.number_of_four_stars", {...tags, number: data.characters?.filter((character: CharacterType) => character.rarity === 4).length ?? "N/A"})}
+                    </RichText>
+                </div>
             </div>
         </div>
     );

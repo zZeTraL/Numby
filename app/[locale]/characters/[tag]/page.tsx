@@ -40,6 +40,7 @@ export default async function CharacterPage({params}: Props) {
                         alt=""
                         width={256}
                         height={512}
+                        priority={true}
                     />
                 </div>
                 <div className="absolute -bottom-15 -right-15 rotate-15 opacity-25 pointer-events-none">
@@ -49,19 +50,22 @@ export default async function CharacterPage({params}: Props) {
                         alt=""
                         width={512}
                         height={512}
+                        priority={true}
                     />
                 </div>
                 <div className="flex flex-row gap-4 z-10">
-                    <Image
-                        className="rounded-full pointer-events-none bg-foreground"
-                        // style={{
-                        //     background: data.character.rarity === 4 ? "linear-gradient(180deg, #414169 0%, #9169BE 100%)" : "linear-gradient(180deg, #9B695A 0%, #C8A570 100%)"
-                        // }}
-                        src={`/game/${data.character.icon}`}
-                        alt={data.character.tag}
-                        width={96}
-                        height={96}
-                    />
+                    <div className="rounded-full size-24 pointer-events-none bg-foreground">
+                        <Image
+                            className="rounded-full"
+                            // style={{
+                            //     background: data.character.rarity === 4 ? "linear-gradient(180deg, #414169 0%, #9169BE 100%)" : "linear-gradient(180deg, #9B695A 0%, #C8A570 100%)"
+                            // }}
+                            src={`/game/${data.character.icon}`}
+                            alt={data.character.tag}
+                            width={96}
+                            height={96}
+                        />
+                    </div>
                     <div className="flex flex-col h-full justify-center gap-1">
                         <h1
                             className="text-2xl text-[#BFBFBF] tracking-wider leading-none"
