@@ -53,6 +53,7 @@
 
   --color-welcome-card: oklch(0% 0 0 / 12%);
   --color-important: oklch(72.39% 0.1426 276.5);
+  --color-ssr: oklch(0.84 0.1301 71.87);
 
   --animate-fade-in: fade-in 0.5s ease-in-out;
   @keyframes fade-in {

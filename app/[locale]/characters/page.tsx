@@ -2,7 +2,7 @@
 import {getTranslations, getLocale} from 'next-intl/server';
 
 // Types
-import {DataType, ElementType, PathType} from "@/utils/types/game";
+import {DataType} from "@/utils/types/game";
 
 // data
 import {getGameData} from "@/data/request";
@@ -25,7 +25,7 @@ export default async function Characters() {
 
     return (
         <div className="flex flex-col gap-4 w-full">
-            <h1 className="text-4xl">{t("title")}</h1>
+            <h1 className="text-4xl tracking-wide">{t("title")}</h1>
             <CharacterShowcase data={data} />
         </div>
     );

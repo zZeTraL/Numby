@@ -29,10 +29,12 @@ const reducer = (state: any, action: any) => {
 };
 
 const availableSortOptions = ["name", "element", "path", "rarity"];
-const availableFilters = ["Physical", "Fire", "Ice", "Thunder", "Wind", "Quantum", "Imaginary", "Warrior", "Rogue", "Mage", "Shaman", "Warlock", "Knight", "Priest"];
+const availableFilters = ["Physical", "Fire", "Ice", "Thunder", "Wind", "Quantum", "Imaginary", "Warrior", "Rogue", "Mage", "Shaman", "Warlock", "Knight", "Priest", 4, 5];
 
 export default function CharacterShowcase({data}: Props) {
     const t = useTranslations("characters");
+
+    // States
     const [sortOption, setSortOption] = useState<string>("");
     const [state, dispatch] = useReducer(reducer, availableFilters);
 
@@ -55,18 +57,17 @@ export default function CharacterShowcase({data}: Props) {
         <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
-                    <AppSortBy options={availableSortOptions} callbackAction={handleSort} />
-                    <CharacterFilter data={data} state={state} callbackAction={dispatch} />
+                    <AppSortBy options={availableSortOptions} callbackAction={handleSort}/>
+                    <CharacterFilter data={data} state={state} callbackAction={dispatch}/>
                 </div>
                 <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                     {
                         data.characters?.map((character: CharacterType, index: number) => {
                             if (character.name === "{NICKNAME}") return null;
-                            if (state.length > 0 && (!state.includes(character.element) || !state.includes(character.path))) return null;
+                            if (state.length > 0 && (!state.includes(character.element) || !state.includes(character.path) || !state.includes(character.rarity))) return null;
 
                             const path = data.paths?.find((path) => path.id === character.path);
                             const element = data.elements?.find((element) => element.id === character.element);
-
                             if (!path || !element) return null;
 
                             return (

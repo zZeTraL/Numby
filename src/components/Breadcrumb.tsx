@@ -1,24 +1,27 @@
 "use client";
 
-import {useLocale, useTranslations} from "next-intl";
-import { usePathname } from "@/i18n/routing";
-
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
-    BreadcrumbPage,
     BreadcrumbSeparator,
+    BreadcrumbPage
 } from "@/components/ui/breadcrumb";
-import { Fragment } from "react";
+
+// i18n
+import {useLocale, useTranslations} from "next-intl";
+import {usePathname} from "@/i18n/routing";
+import {Fragment} from "react";
 
 export default function AppBreadcrumb() {
     const t = useTranslations();
-    const pathname = usePathname();
     const locale = useLocale();
+    const pathname = usePathname();
 
-    const pathSegments = pathname.split("/").filter(Boolean);
+    const formattedPathname = pathname.split("/").filter(Boolean);
+    const isCharacterPath = formattedPathname.includes("characters");
+
 
     return (
         <Breadcrumb>
@@ -26,8 +29,39 @@ export default function AppBreadcrumb() {
                 <BreadcrumbItem>
                     <BreadcrumbLink href={`/${locale}`}>Numby.moe</BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                TO REFACTOR
+                {
+                    pathname === "/" ? (
+                        <>
+                            <BreadcrumbSeparator/>
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>{t("sidebar.home")}</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </>
+                    ) : (
+                        formattedPathname.map((path, index) => {
+                            return (
+                                <Fragment key={index}>
+                                    <BreadcrumbSeparator />
+                                    {
+                                        formattedPathname.length - 1 === index ? (
+                                            <BreadcrumbItem>
+                                                <BreadcrumbPage>
+                                                    {
+                                                        isCharacterPath ? path.charAt(0).toUpperCase() + path.slice(1) : t(`sidebar.${path}`)
+                                                    }
+                                                </BreadcrumbPage>
+                                            </BreadcrumbItem>
+                                        ) : (
+                                            <BreadcrumbItem>
+                                                <BreadcrumbLink href={`/${locale}/${path}`}>{t(`sidebar.${path}`)}</BreadcrumbLink>
+                                            </BreadcrumbItem>
+                                        )
+                                    }
+                                </Fragment>
+                            );
+                        })
+                    )
+                }
             </BreadcrumbList>
         </Breadcrumb>
     );

@@ -22,6 +22,11 @@ const StyledDiv = styled.div<{ $active: boolean }>`
 `;
 
 export default function CharacterFilter({data, state, callbackAction} : Props) {
+    const rarity = [
+        {id: 4, icon: "StarBig_WhiteGlow.png"},
+        {id: 5, icon: "StarBig.png"},
+    ]
+
     return (
         <div className="flex flex-wrap items-center gap-2">
             {
@@ -50,6 +55,22 @@ export default function CharacterFilter({data, state, callbackAction} : Props) {
                         <Image
                             src={`/game/${path.icon}`}
                             alt={path.name}
+                            width={32}
+                            height={32}
+                        />
+                    </StyledDiv>
+                ))
+            }
+            {
+                rarity.map((star, index) => (
+                    <StyledDiv
+                        onClick={() => {callbackAction({type: "toggle", payload: star.id})}}
+                        key={index}
+                        $active={state.includes(star.id)}
+                    >
+                        <Image
+                            src={`/game/icon/deco/${star.icon}`}
+                            alt="Star"
                             width={32}
                             height={32}
                         />

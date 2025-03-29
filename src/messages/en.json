@@ -31,8 +31,8 @@
     "statistics": {
       "title": "Statistics",
       "number_of_characters": "Number of characters: {number}",
-      "number_of_five_stars": "Number of 5★ characters: {number}",
-      "number_of_four_stars": "Number of 4★ characters: {number}"
+      "number_of_five_stars": "Number of <ssr>5★</ssr> characters: {number}",
+      "number_of_four_stars": "Number of <important>4★</important> characters: {number}"
     }
   },
 
