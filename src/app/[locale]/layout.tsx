@@ -2,10 +2,10 @@ import React from "react";
 
 import {NextIntlClientProvider, Locale, hasLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
-import {routing} from '@/i18n/routing';
+import {routing} from '@/src/i18n/routing';
 
 // Global CSS styles
-import "@/app/globals.css"
+import "@/src/app/[locale]/globals.css"
 
 // Sidebar provider and trigger
 import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";

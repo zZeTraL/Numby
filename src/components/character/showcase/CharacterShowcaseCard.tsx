@@ -1,4 +1,4 @@
-import {Link} from "@/i18n/routing";
+import {Link} from "@/src/i18n/routing";
 
 import Image from "next/image";
 
@@ -9,7 +9,7 @@ interface Props {
     path: PathType;
 }
 
-export default function CharacterCard({character, element, path} : Props) {
+export default function CharacterShowcaseCard({character, element, path} : Props) {
     return (
         <Link
             href={`/characters/${character.tag}`}

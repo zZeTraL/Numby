@@ -1,6 +1,6 @@
 import {CharacterType, DataObject, DataType} from "@/utils/types/game";
-import {CharacterDataObject, CharacterDataType} from "@/utils/types/character";
-
+import {CharacterDataType} from "@/utils/types/character";
+import {descFormatByTitle} from "@/utils/format";
 
 /**
  * <p>Fetch a resource from the server based on the locale and file name</p>
@@ -13,6 +13,7 @@ export async function getResource(locale: string, fileName : string) {
     return await fetch(`http://localhost:3000/data/index_min/${locale}/${fileName}.json`, {
         method: "GET",
         next: {
+            // TODO: TO REFACTOR WHEN USE CACHE IS STABLE
             revalidate: 9999999999
         }
     }).then((res => res.json()));
@@ -38,8 +39,8 @@ export async function getGameData(locale: string, files: string[], asArray?: boo
 
 export async function getCharacterDataByTag(locale: string, tag: string) : Promise<CharacterDataType | null> {
     "use cache"
-    const data = await getGameData(locale, ["characters", "elements", "paths", "character_skill_trees", "character_skills", "character_ranks"]);
-    if (!data.characters || !data.paths || !data.elements || !data.character_ranks || !data.character_skills || !data.character_skill_trees) return null;
+    const data = await getGameData(locale, ["characters", "elements", "paths", "character_skill_trees", "character_skills", "character_ranks", "descriptions"]);
+    if (!data.characters || !data.paths || !data.elements || !data.character_ranks || !data.character_skills || !data.character_skill_trees || !data.descriptions) return null;
 
     const character = Object.values(data.characters).find((character: CharacterType) => character.tag === tag);
     const element = Object.values(data.elements).find((element) => element.id === character?.element);
@@ -47,7 +48,8 @@ export async function getCharacterDataByTag(locale: string, tag: string) : Promi
     const ranks = Object.values(data.character_ranks).filter((rank) => character?.ranks.includes(rank.id));
     const skills = Object.values(data.character_skills).filter((skill) => character?.skills.includes(skill.id));
     const skill_trees = Object.values(data.character_skill_trees).filter((skill_tree) => character?.skill_trees.includes(skill_tree.id));
+    const descriptions = Object.values(data.descriptions).filter((desc) => descFormatByTitle(desc.title) === character?.name);
 
-    if (!character || !element || !path || !ranks || !skills || !skill_trees) return null;
-    return {character, element, path, ranks, skills, skill_trees};
+    if (!character || !element || !path || !ranks || !skills || !skill_trees || !descriptions) return null;
+    return {character, element, path, ranks, skills, skill_trees, descriptions};
 }

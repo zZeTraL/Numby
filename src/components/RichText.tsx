@@ -17,7 +17,7 @@ export default function RichText({children, className}: Props) {
                 important: (chunks: ReactNode) => <span className="text-important">{chunks}</span>,
                 sr: (chunks: ReactNode) => <span className="text-important">{chunks}</span>,
                 ssr: (chunks: ReactNode) => <span className="text-ssr">{chunks}</span>,
-                br: () => <br />
+                br: () => <br />,
             })}
         </p>
     );

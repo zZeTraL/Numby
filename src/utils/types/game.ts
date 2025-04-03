@@ -1,6 +1,7 @@
 import {z} from "zod";
 
 import {SkillObject, SkillTreeObject, RankObject} from "@/utils/types/skill";
+import {DescriptionObject} from "@/utils/types/description";
 
 /*
  * This file contains all the types that are used in the game
@@ -60,4 +61,5 @@ export const DataObject = z.object({
     character_ranks: z.array(RankObject).optional(),
     character_skills: z.array(SkillObject).optional(),
     character_skill_trees: z.array(SkillTreeObject).optional(),
+    descriptions: z.array(DescriptionObject).optional(),
 });

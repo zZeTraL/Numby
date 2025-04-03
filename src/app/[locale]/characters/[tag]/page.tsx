@@ -5,12 +5,14 @@ import {notFound} from "next/navigation";
 // Fetch functions
 import {getCharacterDataByTag} from "@/data/request";
 
+// Components
+import RarityStar from "@/components/character/RarityStar";
+import CharacterInformation from "@/components/character/CharacterInformation";
+
 // Types
-import {CharacterType} from "@/utils/types/game";
+import {CharacterDataType} from "@/utils/types/character";
 
 import { Metadata } from "next";
-import {CharacterDataType} from "@/utils/types/character";
-import RarityStar from "@/components/character/RarityStar";
 export const metadata: Metadata = {
     title: "Numby.moe | Characters",
     description: "Your kind Numby asisstant for you."
@@ -32,7 +34,7 @@ export default async function CharacterPage({params}: Props) {
     if (!data) notFound();
 
     return (
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col gap-8 w-full">
             <div className="relative flex gap-4 w-full p-4 bg-background rounded-2xl overflow-hidden">
                 <div className="absolute -left-5 -top-14 rotate-45 opacity-3 pointer-events-none">
                     <Image
@@ -77,6 +79,7 @@ export default async function CharacterPage({params}: Props) {
                     </div>
                 </div>
             </div>
+            <CharacterInformation data={data}/>
         </div>
     );
 }

@@ -11,7 +11,7 @@ import {
 
 // i18n
 import {useLocale, useTranslations} from "next-intl";
-import {usePathname} from "@/i18n/routing";
+import {usePathname} from "@/src/i18n/routing";
 import {Fragment} from "react";
 
 export default function AppBreadcrumb() {
@@ -21,7 +21,6 @@ export default function AppBreadcrumb() {
 
     const formattedPathname = pathname.split("/").filter(Boolean);
     const isCharacterPath = formattedPathname.includes("characters");
-
 
     return (
         <Breadcrumb>

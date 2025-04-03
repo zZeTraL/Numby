@@ -8,8 +8,8 @@ import {useTranslations} from "next-intl";
 
 // Components
 import AppSortBy from "@/components/SortBy";
-import CharacterFilter from "@/components/character/CharacterFilter";
-import CharacterCard from "@/components/character/CharacterCard";
+import CharacterShowcaseFilter from "@/components/character/showcase/CharacterShowcaseFilter";
+import CharacterShowcaseCard from "@/components/character/showcase/CharacterShowcaseCard";
 
 // Types
 import {DataType, CharacterType} from "@/utils/types/game";
@@ -58,7 +58,7 @@ export default function CharacterShowcase({data}: Props) {
             <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
                     <AppSortBy options={availableSortOptions} callbackAction={handleSort}/>
-                    <CharacterFilter data={data} state={state} callbackAction={dispatch}/>
+                    <CharacterShowcaseFilter data={data} state={state} callbackAction={dispatch}/>
                 </div>
                 <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                     {
@@ -71,7 +71,7 @@ export default function CharacterShowcase({data}: Props) {
                             if (!path || !element) return null;
 
                             return (
-                                <CharacterCard
+                                <CharacterShowcaseCard
                                     character={character}
                                     path={path}
                                     element={element}

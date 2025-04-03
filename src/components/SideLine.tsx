@@ -1,6 +1,6 @@
 "use client";
 
-import {usePathname} from "@/i18n/routing";
+import {usePathname} from "@/src/i18n/routing";
 import {useTranslations} from "next-intl";
 
 export default function SideLine() {

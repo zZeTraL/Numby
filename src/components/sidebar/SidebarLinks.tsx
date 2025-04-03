@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import Image from 'next/image';
-import {Link} from '@/i18n/routing';
+import {Link} from '@/src/i18n/routing';
 import {useSelectedLayoutSegment} from 'next/navigation';
 
 // i18n

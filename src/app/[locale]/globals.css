@@ -147,10 +147,10 @@
 
 @font-face {
   font-family: "HonkaiStarRail";
-  src: url('../../public/fonts/SDK_SC_Web.ttf') format("truetype");
+  src: url('../../../public/fonts/SDK_SC_Web.ttf') format("truetype");
 }
 
 @font-face {
   font-family: "FirstWorld";
-  src: url('../../public/fonts/FirstWorld.ttf') format("truetype");
+  src: url('../../../public/fonts/FirstWorld.ttf') format("truetype");
 }

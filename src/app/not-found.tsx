@@ -1,4 +1,4 @@
-import {redirect} from "@/i18n/routing"
+import {redirect} from "@/src/i18n/routing"
 import {notFound} from "next/navigation";
 
 export default function NotFound() {

@@ -3,7 +3,7 @@
 import {useState} from "react";
 
 import {useLocale} from "next-intl";
-import {routing, usePathname, useRouter} from "@/i18n/routing"
+import {routing, usePathname, useRouter} from "@/src/i18n/routing"
 
 import Image from "next/image";
 import {useParams} from "next/navigation";

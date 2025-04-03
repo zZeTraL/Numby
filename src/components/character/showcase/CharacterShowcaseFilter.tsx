@@ -21,7 +21,7 @@ const StyledDiv = styled.div<{ $active: boolean }>`
     }
 `;
 
-export default function CharacterFilter({data, state, callbackAction} : Props) {
+export default function CharacterShowcaseFilter({data, state, callbackAction} : Props) {
     const rarity = [
         {id: 4, icon: "StarBig_WhiteGlow.png"},
         {id: 5, icon: "StarBig.png"},
